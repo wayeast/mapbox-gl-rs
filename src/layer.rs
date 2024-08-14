@@ -81,7 +81,7 @@ impl From<(&str, &str)> for LayoutProperty {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct Layout {
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -92,6 +92,8 @@ pub struct Layout {
     pub icon_image: Option<LayoutProperty>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub icon_size: Option<LayoutProperty>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub visibility: Option<Visibility>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -99,4 +101,12 @@ pub struct Layout {
 pub struct Paint {
     pub line_color: String,
     pub line_width: u32,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub enum Visibility {
+    #[serde(rename = "visible")]
+    Visible,
+    #[serde(rename = "none")]
+    None,
 }
