@@ -33,6 +33,7 @@ log = "0.4.6"
 geojson = "0.24"
 enclose = "1"
 uuid = { version = "1", features = ["v4", "js"] }
+strum = { version = "0.26", features = [ "derive" ] }
 
 [dev-dependencies]
 anyhow = "1"
