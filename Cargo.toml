@@ -34,6 +34,10 @@ geojson = "0.24"
 enclose = "1"
 uuid = { version = "1", features = ["v4", "js"] }
 strum = { version = "0.26", features = [ "derive" ] }
+leptos = { version = "0.6", optional = true }
+
+[features]
+leptos = [ "dep:leptos" ]
 
 [dev-dependencies]
 anyhow = "1"

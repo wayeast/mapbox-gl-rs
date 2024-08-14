@@ -979,6 +979,8 @@ impl Map {
 
     pub fn get_layout_property(&self, layer_id: &str, name: &str) -> error::Result<LayoutProperty> {
         let value = self.inner.getLayoutProperty(layer_id, name);
+        #[cfg(feature = "leptos")]
+        leptos::logging::log!("mapboxgl got layout property: {value:?}");
         let property: LayoutProperty = serde_wasm_bindgen::from_value(value)?;
 
         Ok(property)
