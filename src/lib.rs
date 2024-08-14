@@ -30,7 +30,7 @@ use geometry::IntoQueryGeometry;
 pub use handler::BoxZoomHandler;
 pub use id::{CallbackId, MapListenerId, MarkerId};
 pub use image::{Image, ImageOptions};
-pub use layer::{Layer, Layout, LayoutProperty, Paint};
+pub use layer::{Layer, Layout, LayoutProperty, Paint, Visibility};
 pub use marker::{Marker, MarkerEventListener, MarkerOptions};
 pub use popup::{Popup, PopupOptions};
 pub use source::GeoJsonSource;
@@ -975,5 +975,24 @@ impl Map {
 
         self.inner
             .flyTo(options.serialize(&ser).unwrap(), JsValue::null());
+    }
+
+    pub fn get_layout_property(&self, layer_id: &str, name: &str) -> error::Result<LayoutProperty> {
+        let value = self.inner.getLayoutProperty(layer_id, name);
+        let property: LayoutProperty = serde_wasm_bindgen::from_value(value)?;
+
+        Ok(property)
+    }
+
+    pub fn set_layout_property(
+        &self,
+        layer_id: &str,
+        name: &str,
+        value: LayoutProperty,
+    ) -> error::Result<()> {
+        let value = serde_wasm_bindgen::to_value(&value)?;
+        self.inner.setLayoutProperty(layer_id, name, value);
+
+        Ok(())
     }
 }

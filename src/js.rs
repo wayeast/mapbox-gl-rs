@@ -238,6 +238,12 @@ extern "C" {
     #[wasm_bindgen(method)]
     pub fn getCenter(this: &Map) -> LngLat;
 
+    #[wasm_bindgen(method)]
+    pub fn getLayoutProperty(this: &Map, layerId: &str, name: &str) -> JsValue;
+
+    #[wasm_bindgen(method)]
+    pub fn setLayoutProperty(this: &Map, layerId: &str, name: &str, value: JsValue) -> Map;
+
     // --
 
     pub type BoxZoomHandler;
